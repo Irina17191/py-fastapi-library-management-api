@@ -13,19 +13,11 @@ class AuthorCreate(AuthorBase):
     pass
 
 
-class AuthorList(AuthorBase):
-    id: int
-    books: List["Book"]
-
-    class Config:
-        orm_mode = True
-
-
 class AuthorDetail(AuthorBase):
     id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class BookBase(BaseModel):
@@ -43,4 +35,12 @@ class Book(BookBase):
     author: AuthorBase
 
     class Config:
-        orm_mode = True
+        from_attributes = True
+
+
+class AuthorList(AuthorBase):
+    id: int
+    books: List[Book]
+
+    class Config:
+        from_attributes = True
